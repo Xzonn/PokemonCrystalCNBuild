@@ -1,0 +1,47 @@
+name: Auto Build
+
+on:
+  push:
+    branches: 
+      - master
+      - github-action
+  pull_request:
+    branches: 
+      - master
+      - github-action
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install openpyxl
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Setup Environment and Build
+      run: |
+        source env-setup
+        pmc_finit
+        pmc_isys
+        pmc_itext
+        pmc_build
+    - name: Build VC
+      run: |
+        source env-setup
+        echo -e "00:0090 SCREEN_HEIGHT_PX\n00:0001 A_BUTTON\n00:0016 MAPGROUP_CIANWOOD\n00:0008 MAP_CIANWOOD_PHOTO_STUDIO\n00:0000 NO_INPUT\n00:0002 B_BUTTON\n00:0040 D_UP\n00:0080 D_DOWN\n00:005a FISSURE\n00:0078 SELFDESTRUCT\n00:0057 THUNDER\n00:0094 FLASH\n00:0099 EXPLOSION\n00:0020 HORN_DRILL\n00:003f HYPER_BEAM\n00:00d9 PRESENT\n00:00d1 anim_1gfx_command" >build/vc/pokecrystal11.constants.sym
+        cd build
+        make crystal11_vc
+    - uses: actions/upload-artifact@v3
+      continue-on-error: true
+      with:
+        name: Results
+        path: |
+          build/*.gbc
+          build/*.patch
