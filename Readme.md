@@ -37,7 +37,7 @@ CRC32: 9716D3A2
 ```
 
 ## Virtual Console 支持
-由于本人对 GB 世代的游戏研究有限，虽然已经尽可能实现了代码合并，但仍无法完美编译。目前，在`build`目录下使用`rgbasm vc/pokecrystal11.constants.asm`指令会报错，作为替代方案，可手动将以下内容保存为`build/pokecrystal11.constants.sym`：
+由于本人对 GB 世代的游戏研究有限，虽然已经尽可能实现了代码合并，但仍无法完美编译。目前，在`build`目录下使用`rgbasm vc/pokecrystal11.constants.asm`指令会报错，作为替代方案，可手动将以下内容保存为`build/vc/pokecrystal11.constants.sym`：
 
 ```
 00:0090 SCREEN_HEIGHT_PX
@@ -76,9 +76,9 @@ CRC32: DEFBA27B
 以及补丁`pokecrystal11.patch`文件，校验码为：
 
 ```
-MD5: A8D0B8B81A944D5B23EAB31A0955D3EC
-SHA1: 68D951E7F503DDEE96D8C7D8C5270382D4D17F69
-CRC32: 4F1B02DE
+MD5: 8025CD6A895FCD90A656F5DC146E5419
+SHA1: 61ADA08C5A5CAF1A19E0F87BA474E29DD611670C
+CRC32: 1BF9A7B4
 ```
 
 运行过程中提示并非所有 ROM 差异均包含于补丁中，目前我尚未发现有效的解决方法。
