@@ -7,7 +7,7 @@
 请完全克隆本项目：
 
 ``` bash
-git clone https://github.com/Xzonn/PokemonCrystalCN.git --recursive
+git clone https://github.com/Xzonn/PokemonCrystalCNBuild.git --recursive
 ```
 
 然后运行：
